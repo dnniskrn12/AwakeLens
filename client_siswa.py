@@ -22,7 +22,7 @@ from pathlib import Path
 
 # ─── KONFIGURASI ───────────────────────────────────────────────────────────────
 # Ganti dengan URL server kamu (Railway/Render/ngrok)
-SERVER_URL = "https://YOUR-SERVER-URL.railway.app"  # GANTI INI!
+SERVER_URL = "https://project-detection-production.up.railway.app"  # GANTI INI!
 # SERVER_URL = "http://localhost:8000"  # untuk testing lokal
 
 # Path model deteksi kamu
