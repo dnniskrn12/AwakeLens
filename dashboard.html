@@ -411,18 +411,61 @@
   .theme-toggle {
     display: flex; align-items: center;
     background: var(--bg2); border: 1px solid var(--border2);
-    border-radius: 100px; padding: 3px;
+    border-radius: 100px; padding: 4px;
     gap: 2px; cursor: pointer;
   }
   .theme-btn {
-    padding: 5px 12px; border-radius: 100px;
-    font-size: 12px; font-weight: 600; border: none;
-    background: transparent; color: var(--muted);
-    font-family: inherit; cursor: pointer;
-    transition: all .2s; line-height: 1;
+    width: 34px; height: 28px; border-radius: 100px;
+    display: flex; align-items: center; justify-content: center;
+    border: none; background: transparent;
+    cursor: pointer; transition: all .22s;
+    color: var(--muted);
   }
+  .theme-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .theme-btn.active {
     background: var(--blue); color: #fff;
+    box-shadow: 0 2px 8px rgba(59,130,246,.35);
+  }
+  .theme-btn:not(.active):hover { background: var(--bg3); color: var(--text); }
+
+  /* ── FOOTER ── */
+  footer {
+    position: relative; z-index: 1;
+    border-top: 1px solid var(--border);
+    background: var(--bg2);
+    padding: 20px 32px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 16px;
+  }
+  .footer-inner {
+    display: flex; align-items: center; gap: 14px;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .footer-divider {
+    width: 1px; height: 20px;
+    background: var(--border2);
+    flex-shrink: 0;
+  }
+  .footer-name {
+    font-size: 13px; font-weight: 600;
+    color: var(--text); letter-spacing: .2px;
+  }
+  .footer-nim {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--blue);
+    background: rgba(59,130,246,.08);
+    border: 1px solid rgba(59,130,246,.2);
+    padding: 3px 10px; border-radius: 6px;
+    letter-spacing: .5px;
+  }
+  .footer-brand {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--muted);
+  }
+  .footer-brand span { color: var(--blue); font-weight: 600; }
+  .footer-dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--muted); opacity: .5;
   }
 </style>
 </head>
@@ -438,8 +481,14 @@
     <span style="font-size:13px;color:var(--muted)" id="last-update">Menunggu data...</span>
     <!-- Theme Toggle -->
     <div class="theme-toggle" title="Ganti tema">
-      <button class="theme-btn" id="btn-dark" onclick="setTheme('dark')">🌙 Dark</button>
-      <button class="theme-btn active" id="btn-light" onclick="setTheme('light')">☀️ Light</button>
+      <!-- Dark mode icon: moon -->
+      <button class="theme-btn" id="btn-dark" onclick="setTheme('dark')" title="Mode Gelap">
+        <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <!-- Light mode icon: sun -->
+      <button class="theme-btn active" id="btn-light" onclick="setTheme('light')" title="Mode Terang">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
     </div>
     <div class="conn-badge offline" id="conn-badge">
       <div class="conn-dot" id="conn-dot"></div>
@@ -536,6 +585,24 @@
 
 <!-- ALERT BANNER -->
 <div class="alert-banner" id="alert-banner"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="logoawakelens.ico" alt="" style="width:18px;height:18px;border-radius:4px;">
+      <span>AwakeLens</span>
+      &mdash; Sistem Deteksi Mengantuk
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-name">Dennis Ma'rifatul Kurnia</div>
+    <div class="footer-nim">2213030120</div>
+    <div class="footer-dot"></div>
+    <div class="footer-brand" style="font-size:11px">
+      Teknik Informatika &bull; 2022
+    </div>
+  </div>
+</footer>
 
 <script>
 // ─── THEME ────────────────────────────────────────────────────────────────────
