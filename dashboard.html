@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AwakeLens — Dashboard Dosen</title>
-<link rel="icon" type="image/png" href="logoawakelens.ico">
+<link rel="icon" type="image/x-icon" href="logoawakelens.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -386,9 +386,9 @@
 <!-- HEADER -->
 <header>
   <div class="logo">
-    <div class="logo-icon">👁</div>
-    AwakeLens
-  </div>
+  <img src="logoawakelens.ico" alt="Logo AwakeLens" style="width: 44px; height: 44px;">
+  AwakeLens
+</div>
   <div class="header-right">
     <span style="font-size:13px;color:var(--muted)" id="last-update">Menunggu data...</span>
     <div class="conn-badge offline" id="conn-badge">
@@ -402,12 +402,12 @@
   <!-- CONFIG BAR -->
   <div class="config-bar">
     <label>🔗 URL Server:</label>
-    <input type="text" id="server-url" placeholder="https://your-app.railway.app" value="">
+    <input type="text" id="server-url" placeholder="https://awakelens.up.railway.app" value="">
     <button class="config-btn" onclick="connectToServer()">Hubungkan</button>
   </div>
 
   <div class="page-title">
-    <h1>Monitoring Kelas</h1>
+    <h1>Monitoring Kelas Online</h1>
     <p id="subtitle">Hubungkan ke server untuk mulai memantau</p>
   </div>
 
@@ -416,22 +416,22 @@
     <div class="stat-card awake">
       <div class="stat-label">Aktif / Awake</div>
       <div class="stat-value" id="count-awake">0</div>
-      <div class="stat-sub">siswa fokus</div>
+      <div class="stat-sub">Mahasiswa fokus</div>
     </div>
     <div class="stat-card drowsy">
-      <div class="stat-label">Mengantuk / Pre-Drowsy</div>
+      <div class="stat-label">Akan Mengantuk / Pre-Drowsy</div>
       <div class="stat-value" id="count-drowsy">0</div>
       <div class="stat-sub">perlu diperhatikan</div>
     </div>
     <div class="stat-card sleep">
-      <div class="stat-label">Tidur / Sleeping</div>
+      <div class="stat-label">Tidur / Drowsy</div>
       <div class="stat-value" id="count-sleep">0</div>
       <div class="stat-sub">perlu dibangunkan</div>
     </div>
     <div class="stat-card total">
       <div class="stat-label">Total Terhubung</div>
       <div class="stat-value" id="count-total">0</div>
-      <div class="stat-sub">siswa online</div>
+      <div class="stat-sub">Mahasiswa online</div>
     </div>
   </div>
 
@@ -443,8 +443,8 @@
     </div>
     <button class="filter-btn active" onclick="setFilter('all', this)">Semua</button>
     <button class="filter-btn" onclick="setFilter('awake', this)">Awake</button>
-    <button class="filter-btn" onclick="setFilter('drowsy', this)">Drowsy</button>
-    <button class="filter-btn" onclick="setFilter('sleeping', this)">Sleeping</button>
+    <button class="filter-btn" onclick="setFilter('drowsy', this)">Pre-Drowsy</button>
+    <button class="filter-btn" onclick="setFilter('sleeping', this)">Drowsy</button>
     <button class="reset-btn" onclick="resetData()">Reset Data</button>
   </div>
 
@@ -452,7 +452,7 @@
   <div class="students-grid" id="students-grid">
     <div class="empty-state" style="grid-column:1/-1">
       <div class="empty-icon">🎓</div>
-      <p>Belum ada siswa terhubung.<br>Minta siswa jalankan client_siswa.py</p>
+      <p>Belum ada Mahasiswa terhubung.<br>Minta Mahasiswa jalankan client_Mahasiswa.py</p>
     </div>
   </div>
 
@@ -569,7 +569,7 @@ async function fetchLogs() {
 }
 
 async function resetData() {
-  if (!confirm('Reset semua data siswa?')) return;
+  if (!confirm('Reset semua data Mahasiswa?')) return;
   try {
     await fetch(`${SERVER_URL}/api/reset`, { method: 'DELETE' });
     students = {};
@@ -643,7 +643,7 @@ function renderStudents() {
   if (filtered.length === 0) {
     grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
       <div class="empty-icon">🎓</div>
-      <p>Belum ada siswa terhubung.<br>Minta siswa jalankan client_siswa.py</p>
+      <p>Belum ada Mahasiswa terhubung.<br>Minta Mahasiswa jalankan client_Mahasiswa.py</p>
     </div>`;
     return;
   }
@@ -725,7 +725,7 @@ function showAlert(name, className) {
   const banner = document.getElementById('alert-banner');
   const el = document.createElement('div');
   el.className = 'alert-item';
-  el.innerHTML = `<div class="alert-title">⚠️ Siswa Tertidur!</div>
+  el.innerHTML = `<div class="alert-title">⚠️ Mahasiswa Tertidur!</div>
     <div class="alert-body">${escHtml(name)} (${escHtml(className || 'Kelas Umum')}) terdeteksi tidur</div>`;
   banner.appendChild(el);
   setTimeout(() => el.remove(), 6000);
