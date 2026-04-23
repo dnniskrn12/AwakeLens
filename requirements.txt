@@ -1,9 +1,6 @@
---extra-index-url https://pytorch.org
-torch
-torchvision
-ultralytics
 fastapi
 uvicorn[standard]
 pydantic
 python-multipart
-opencv-python-headless
+opencv-python
+ultralytics
