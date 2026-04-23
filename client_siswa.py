@@ -282,7 +282,7 @@ def main():
             fps_start = time.time()
         
         # ── DETEKSI MODEL ──
-        results = model(frame, conf=0.35, verbose=False)
+        results = model(frame, conf=0.3, verbose=False)
         
         best_status = "awake"
         best_conf = 0.0

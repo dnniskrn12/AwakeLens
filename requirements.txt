@@ -2,5 +2,8 @@ fastapi
 uvicorn[standard]
 pydantic
 python-multipart
-opencv-python
+--extra-index-url https://pytorch.org
+torch
+torchvision
 ultralytics
+opencv-python-headless
