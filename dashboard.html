@@ -1,796 +1,1257 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AwakeLens — Dashboard Dosen</title>
-<link rel="icon" type="image/x-icon" href="logoawakelens.ico">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg:       #0a0e1a;
-    --bg2:      #111827;
-    --bg3:      #1a2236;
-    --border:   rgba(255,255,255,0.07);
-    --border2:  rgba(255,255,255,0.12);
-    --text:     #e8eaf0;
-    --muted:    #6b7280;
-    --green:    #10b981;
-    --amber:    #f59e0b;
-    --red:      #ef4444;
-    --blue:     #3b82f6;
-    --green-glow: rgba(16,185,129,0.15);
-    --amber-glow: rgba(245,158,11,0.15);
-    --red-glow:   rgba(239,68,68,0.15);
-    --header-bg: rgba(10,14,26,0.9);
-    --grid-line: rgba(59,130,246,0.03);
-    --scrollbar: rgba(255,255,255,.1);
-    --row-hover: rgba(255,255,255,.02);
-    --thead-bg:  rgba(255,255,255,.02);
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AwakeLens — Dashboard Dosen</title>
+  <link rel="icon" type="image/x-icon" href="logoawakelens.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --bg2: #111827;
+      --bg3: #1a2236;
+      --border: rgba(255, 255, 255, 0.07);
+      --border2: rgba(255, 255, 255, 0.12);
+      --text: #e8eaf0;
+      --muted: #6b7280;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --blue: #3b82f6;
+      --green-glow: rgba(16, 185, 129, 0.15);
+      --amber-glow: rgba(245, 158, 11, 0.15);
+      --red-glow: rgba(239, 68, 68, 0.15);
+      --header-bg: rgba(10, 14, 26, 0.9);
+      --grid-line: rgba(59, 130, 246, 0.03);
+      --scrollbar: rgba(255, 255, 255, .1);
+      --row-hover: rgba(255, 255, 255, .02);
+      --thead-bg: rgba(255, 255, 255, .02);
+    }
 
-  /* ── LIGHT MODE ── */
-  [data-theme="light"] {
-    --bg:       #f0f4ff;
-    --bg2:      #ffffff;
-    --bg3:      #e8eef8;
-    --border:   rgba(0,0,0,0.08);
-    --border2:  rgba(0,0,0,0.14);
-    --text:     #1a2236;
-    --muted:    #7b8394;
-    --green:    #059669;
-    --amber:    #d97706;
-    --red:      #dc2626;
-    --blue:     #2563eb;
-    --green-glow: rgba(5,150,105,0.1);
-    --amber-glow: rgba(217,119,6,0.1);
-    --red-glow:   rgba(220,38,38,0.1);
-    --header-bg: rgba(240,244,255,0.92);
-    --grid-line: rgba(59,130,246,0.05);
-    --scrollbar: rgba(0,0,0,.12);
-    --row-hover: rgba(0,0,0,.02);
-    --thead-bg:  rgba(0,0,0,.02);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
+    /* ── LIGHT MODE ── */
+    [data-theme="light"] {
+      --bg: #f0f4ff;
+      --bg2: #ffffff;
+      --bg3: #e8eef8;
+      --border: rgba(0, 0, 0, 0.08);
+      --border2: rgba(0, 0, 0, 0.14);
+      --text: #1a2236;
+      --muted: #7b8394;
+      --green: #059669;
+      --amber: #d97706;
+      --red: #dc2626;
+      --blue: #2563eb;
+      --green-glow: rgba(5, 150, 105, 0.1);
+      --amber-glow: rgba(217, 119, 6, 0.1);
+      --red-glow: rgba(220, 38, 38, 0.1);
+      --header-bg: rgba(240, 244, 255, 0.92);
+      --grid-line: rgba(59, 130, 246, 0.05);
+      --scrollbar: rgba(0, 0, 0, .12);
+      --row-hover: rgba(0, 0, 0, .02);
+      --thead-bg: rgba(0, 0, 0, .02);
+    }
 
-  body {
-    font-family: 'Space Grotesk', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* Animated grid background */
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image:
-      linear-gradient(var(--grid-line) 1px, transparent 1px),
-      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
-  }
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  /* ── HEADER ── */
-  header {
-    position: sticky; top: 0; z-index: 100;
-    background: var(--header-bg);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-    padding: 0 32px;
-    height: 64px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .logo {
-    display: flex; align-items: center; gap: 12px;
-    font-size: 20px; font-weight: 700;
-    letter-spacing: -0.5px;
-  }
-  .logo-icon {
-    width: 36px; height: 36px; border-radius: 10px;
-    background: linear-gradient(135deg, var(--blue), #8b5cf6);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 18px;
-  }
-  .header-right {
-    display: flex; align-items: center; gap: 20px;
-  }
-  .conn-badge {
-    display: flex; align-items: center; gap: 6px;
-    padding: 6px 14px; border-radius: 100px;
-    border: 1px solid var(--border2);
-    font-size: 12px; font-weight: 500;
-    font-family: 'JetBrains Mono', monospace;
-    transition: all .3s;
-  }
-  .conn-badge.online { border-color: rgba(16,185,129,.3); background: rgba(16,185,129,.08); color: var(--green); }
-  .conn-badge.offline { border-color: rgba(239,68,68,.3); background: rgba(239,68,68,.08); color: var(--red); }
-  .conn-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: currentColor;
-  }
-  .conn-dot.pulse { animation: pulse 2s infinite; }
-  @keyframes pulse {
-    0%,100% { opacity:1; transform:scale(1); }
-    50% { opacity:.5; transform:scale(1.3); }
-  }
+    /* Animated grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      z-index: 0;
+    }
 
-  /* ── MAIN ── */
-  main {
-    position: relative; z-index: 1;
-    max-width: 1400px; margin: 0 auto;
-    padding: 32px 24px 48px;
-  }
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--header-bg);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-  .page-title {
-    margin-bottom: 28px;
-  }
-  .page-title h1 {
-    font-size: 28px; font-weight: 700; letter-spacing: -0.5px;
-    margin-bottom: 4px;
-  }
-  .page-title p { color: var(--muted); font-size: 14px; }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
 
-  /* ── STATS CARDS ── */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-  .stat-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 20px 24px;
-    position: relative; overflow: hidden;
-    transition: border-color .2s, transform .2s;
-  }
-  .stat-card:hover { transform: translateY(-2px); border-color: var(--border2); }
-  .stat-card::before {
-    content: '';
-    position: absolute; top: 0; left: 0; right: 0;
-    height: 2px;
-  }
-  .stat-card.awake::before  { background: var(--green); }
-  .stat-card.drowsy::before { background: var(--amber); }
-  .stat-card.sleep::before  { background: var(--red); }
-  .stat-card.total::before  { background: var(--blue); }
-  .stat-label {
-    font-size: 11px; font-weight: 600; letter-spacing: 1px;
-    text-transform: uppercase; color: var(--muted);
-    margin-bottom: 8px;
-  }
-  .stat-value {
-    font-size: 40px; font-weight: 700;
-    font-family: 'JetBrains Mono', monospace;
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  .stat-card.awake .stat-value  { color: var(--green); }
-  .stat-card.drowsy .stat-value { color: var(--amber); }
-  .stat-card.sleep .stat-value  { color: var(--red); }
-  .stat-card.total .stat-value  { color: var(--blue); }
-  .stat-sub { font-size: 12px; color: var(--muted); }
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue), #8b5cf6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
 
-  /* ── CONTROLS ── */
-  .controls {
-    display: flex; align-items: center; gap: 12px;
-    margin-bottom: 20px; flex-wrap: wrap;
-  }
-  .search-box {
-    flex: 1; min-width: 200px;
-    display: flex; align-items: center; gap: 10px;
-    background: var(--bg2); border: 1px solid var(--border);
-    border-radius: 10px; padding: 10px 16px;
-    transition: border-color .2s;
-  }
-  .search-box:focus-within { border-color: rgba(59,130,246,.4); }
-  .search-box input {
-    background: none; border: none; outline: none;
-    color: var(--text); font-family: inherit; font-size: 14px;
-    width: 100%;
-  }
-  .search-box input::placeholder { color: var(--muted); }
-  .filter-btn {
-    padding: 10px 18px; border-radius: 10px;
-    border: 1px solid var(--border); background: var(--bg2);
-    color: var(--muted); font-family: inherit; font-size: 13px;
-    cursor: pointer; transition: all .2s; white-space: nowrap;
-  }
-  .filter-btn:hover { border-color: var(--border2); color: var(--text); }
-  .filter-btn.active { border-color: rgba(59,130,246,.4); background: rgba(59,130,246,.08); color: var(--blue); }
-  .reset-btn {
-    padding: 10px 18px; border-radius: 10px;
-    border: 1px solid rgba(239,68,68,.3); background: rgba(239,68,68,.08);
-    color: var(--red); font-family: inherit; font-size: 13px;
-    cursor: pointer; transition: all .2s;
-  }
-  .reset-btn:hover { background: rgba(239,68,68,.15); }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
 
-  /* ── STUDENT GRID ── */
-  .students-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px;
-    margin-bottom: 32px;
-  }
-  .student-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 20px;
-    position: relative; overflow: hidden;
-    transition: all .25s;
-    animation: fadeIn .3s ease;
-  }
-  @keyframes fadeIn {
-    from { opacity:0; transform:translateY(8px); }
-    to   { opacity:1; transform:translateY(0); }
-  }
-  .student-card:hover { transform: translateY(-3px); border-color: var(--border2); }
-  .student-card.awake   { border-left: 3px solid var(--green); }
-  .student-card.drowsy  { border-left: 3px solid var(--amber); }
-  .student-card.sleeping { border-left: 3px solid var(--red); box-shadow: 0 0 20px rgba(239,68,68,.1); }
-  .student-card.offline { border-left: 3px solid var(--muted); opacity: .7; }
+    .conn-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--border2);
+      font-size: 12px;
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
+      transition: all .3s;
+    }
 
-  .student-header {
-    display: flex; align-items: center; gap: 14px;
-    margin-bottom: 16px;
-  }
-  .avatar {
-    width: 46px; height: 46px; border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 16px; flex-shrink: 0;
-  }
-  .avatar.awake   { background: var(--green-glow); color: var(--green); border: 1px solid rgba(16,185,129,.2); }
-  .avatar.drowsy  { background: var(--amber-glow); color: var(--amber); border: 1px solid rgba(245,158,11,.2); }
-  .avatar.sleeping { background: var(--red-glow); color: var(--red); border: 1px solid rgba(239,68,68,.2); }
-  .avatar.offline { background: rgba(107,114,128,.1); color: var(--muted); border: 1px solid rgba(107,114,128,.2); }
+    .conn-badge.online {
+      border-color: rgba(16, 185, 129, .3);
+      background: rgba(16, 185, 129, .08);
+      color: var(--green);
+    }
 
-  .student-info h3 {
-    font-size: 15px; font-weight: 600; margin-bottom: 2px;
-  }
-  .student-info .sid {
-    font-size: 11px; color: var(--muted);
-    font-family: 'JetBrains Mono', monospace;
-  }
+    .conn-badge.offline {
+      border-color: rgba(239, 68, 68, .3);
+      background: rgba(239, 68, 68, .08);
+      color: var(--red);
+    }
 
-  .status-badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    padding: 4px 12px; border-radius: 100px;
-    font-size: 12px; font-weight: 600; letter-spacing: .3px;
-    margin-bottom: 12px;
-  }
-  .status-badge.awake   { background: var(--green-glow); color: var(--green); }
-  .status-badge.drowsy  { background: var(--amber-glow); color: var(--amber); }
-  .status-badge.sleeping { background: var(--red-glow); color: var(--red); }
-  .status-badge.offline { background: rgba(107,114,128,.1); color: var(--muted); }
-  .badge-dot {
-    width: 6px; height: 6px; border-radius: 50%;
-    background: currentColor;
-  }
-  .badge-dot.pulse-dot { animation: pulse 1.5s infinite; }
+    .conn-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+    }
 
-  .card-meta {
-    display: flex; justify-content: space-between; align-items: center;
-    font-size: 11px; color: var(--muted);
-    border-top: 1px solid var(--border);
-    padding-top: 12px; margin-top: 4px;
-  }
-  .card-meta .class-tag {
-    background: rgba(59,130,246,.08);
-    color: rgba(59,130,246,.8);
-    border: 1px solid rgba(59,130,246,.15);
-    padding: 2px 8px; border-radius: 6px;
-    font-size: 11px;
-  }
+    .conn-dot.pulse {
+      animation: pulse 2s infinite;
+    }
 
-  /* ── ALERT BANNER ── */
-  .alert-banner {
-    position: fixed; bottom: 24px; right: 24px;
-    max-width: 340px; z-index: 999;
-    display: flex; flex-direction: column; gap: 8px;
-    pointer-events: none;
-  }
-  .alert-item {
-    background: var(--bg3);
-    border: 1px solid rgba(239,68,68,.4);
-    border-left: 4px solid var(--red);
-    border-radius: 12px; padding: 14px 18px;
-    animation: slideIn .3s ease;
-    pointer-events: all;
-    box-shadow: 0 8px 32px rgba(0,0,0,.4);
-  }
-  @keyframes slideIn {
-    from { transform: translateX(120%); opacity:0; }
-    to   { transform: translateX(0); opacity:1; }
-  }
-  .alert-item .alert-title {
-    font-size: 13px; font-weight: 600; color: var(--red);
-    margin-bottom: 2px;
-  }
-  .alert-item .alert-body {
-    font-size: 12px; color: var(--muted);
-  }
+    @keyframes pulse {
 
-  /* ── LOG TABLE ── */
-  .section-title {
-    font-size: 16px; font-weight: 600;
-    margin-bottom: 14px; color: var(--text);
-    display: flex; align-items: center; gap: 10px;
-  }
-  .section-badge {
-    font-size: 11px; background: rgba(59,130,246,.1);
-    color: var(--blue); padding: 2px 8px;
-    border-radius: 6px; font-weight: 500;
-    font-family: 'JetBrains Mono', monospace;
-  }
-  .log-table-wrap {
-    background: var(--bg2); border: 1px solid var(--border);
-    border-radius: 16px; overflow: hidden;
-  }
-  table {
-    width: 100%; border-collapse: collapse;
-    font-size: 13px;
-  }
-  thead th {
-    padding: 14px 18px; text-align: left;
-    font-size: 11px; font-weight: 600;
-    text-transform: uppercase; letter-spacing: .8px;
-    color: var(--muted);
-    border-bottom: 1px solid var(--border);
-    background: var(--thead-bg);
-  }
-  tbody tr {
-    border-bottom: 1px solid var(--border);
-    transition: background .15s;
-  }
-  tbody tr:last-child { border-bottom: none; }
-  tbody tr:hover { background: var(--row-hover); }
-  tbody td { padding: 12px 18px; }
-  .log-status {
-    display: inline-block; padding: 2px 10px;
-    border-radius: 6px; font-size: 11px; font-weight: 600;
-  }
-  .log-status.awake   { background: var(--green-glow); color: var(--green); }
-  .log-status.drowsy  { background: var(--amber-glow); color: var(--amber); }
-  .log-status.sleeping { background: var(--red-glow); color: var(--red); }
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
 
-  /* ── EMPTY STATE ── */
-  .empty-state {
-    text-align: center; padding: 60px 24px;
-    color: var(--muted);
-  }
-  .empty-state .empty-icon { font-size: 48px; margin-bottom: 12px; }
-  .empty-state p { font-size: 14px; }
+      50% {
+        opacity: .5;
+        transform: scale(1.3);
+      }
+    }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 600px) {
-    header { padding: 0 16px; }
-    main { padding: 20px 16px 40px; }
-    .stats-grid { grid-template-columns: 1fr 1fr; }
-    .students-grid { grid-template-columns: 1fr; }
-    .controls { flex-direction: column; align-items: stretch; }
-  }
+    /* ── MAIN ── */
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 32px 24px 48px;
+    }
 
-  /* ── SERVER URL CONFIG ── */
-  .config-bar {
-    background: rgba(59,130,246,.05);
-    border: 1px solid rgba(59,130,246,.15);
-    border-radius: 12px; padding: 14px 18px;
-    margin-bottom: 24px;
-    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
-  }
-  .config-bar label { font-size: 13px; color: var(--muted); white-space: nowrap; }
-  .config-bar input {
-    flex: 1; min-width: 200px;
-    background: var(--bg); border: 1px solid var(--border);
-    border-radius: 8px; padding: 8px 12px;
-    color: var(--text); font-family: 'JetBrains Mono', monospace;
-    font-size: 13px; outline: none;
-  }
-  .config-bar input:focus { border-color: rgba(59,130,246,.4); }
-  .config-btn {
-    padding: 8px 18px; border-radius: 8px;
-    background: var(--blue); border: none;
-    color: white; font-family: inherit; font-size: 13px;
-    font-weight: 600; cursor: pointer;
-    transition: opacity .2s;
-  }
-  .config-btn:hover { opacity: .85; }
+    .page-title {
+      margin-bottom: 28px;
+    }
 
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: transparent; }
-  ::-webkit-scrollbar-thumb { background: var(--scrollbar); border-radius: 3px; }
+    .page-title h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
 
-  /* ── THEME TOGGLE ── */
-  .theme-toggle {
-    display: flex; align-items: center;
-    background: var(--bg2); border: 1px solid var(--border2);
-    border-radius: 100px; padding: 4px;
-    gap: 2px; cursor: pointer;
-  }
-  .theme-btn {
-    width: 34px; height: 28px; border-radius: 100px;
-    display: flex; align-items: center; justify-content: center;
-    border: none; background: transparent;
-    cursor: pointer; transition: all .22s;
-    color: var(--muted);
-  }
-  .theme-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .theme-btn.active {
-    background: var(--blue); color: #fff;
-    box-shadow: 0 2px 8px rgba(59,130,246,.35);
-  }
-  .theme-btn:not(.active):hover { background: var(--bg3); color: var(--text); }
+    .page-title p {
+      color: var(--muted);
+      font-size: 14px;
+    }
 
-  /* ── FOOTER ── */
-  footer {
-    position: relative; z-index: 1;
-    border-top: 1px solid var(--border);
-    background: var(--bg2);
-    padding: 20px 32px;
-    display: flex; align-items: center; justify-content: center;
-    gap: 16px;
-  }
-  .footer-inner {
-    display: flex; align-items: center; gap: 14px;
-    flex-wrap: wrap; justify-content: center;
-  }
-  .footer-divider {
-    width: 1px; height: 20px;
-    background: var(--border2);
-    flex-shrink: 0;
-  }
-  .footer-name {
-    font-size: 13px; font-weight: 600;
-    color: var(--text); letter-spacing: .2px;
-  }
-  .footer-nim {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px; color: var(--blue);
-    background: rgba(59,130,246,.08);
-    border: 1px solid rgba(59,130,246,.2);
-    padding: 3px 10px; border-radius: 6px;
-    letter-spacing: .5px;
-  }
-  .footer-brand {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 12px; color: var(--muted);
-  }
-  .footer-brand span { color: var(--blue); font-weight: 600; }
-  .footer-dot {
-    width: 4px; height: 4px; border-radius: 50%;
-    background: var(--muted); opacity: .5;
-  }
-</style>
+    /* ── STATS CARDS ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .stat-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 24px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--border2);
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+    }
+
+    .stat-card.awake::before {
+      background: var(--green);
+    }
+
+    .stat-card.drowsy::before {
+      background: var(--amber);
+    }
+
+    .stat-card.sleep::before {
+      background: var(--red);
+    }
+
+    .stat-card.total::before {
+      background: var(--blue);
+    }
+
+    .stat-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 40px;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-card.awake .stat-value {
+      color: var(--green);
+    }
+
+    .stat-card.drowsy .stat-value {
+      color: var(--amber);
+    }
+
+    .stat-card.sleep .stat-value {
+      color: var(--red);
+    }
+
+    .stat-card.total .stat-value {
+      color: var(--blue);
+    }
+
+    .stat-sub {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── CONTROLS ── */
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 16px;
+      transition: border-color .2s;
+    }
+
+    .search-box:focus-within {
+      border-color: rgba(59, 130, 246, .4);
+    }
+
+    .search-box input {
+      background: none;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 14px;
+      width: 100%;
+    }
+
+    .search-box input::placeholder {
+      color: var(--muted);
+    }
+
+    .filter-btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      color: var(--muted);
+      font-family: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+
+    .filter-btn:hover {
+      border-color: var(--border2);
+      color: var(--text);
+    }
+
+    .filter-btn.active {
+      border-color: rgba(59, 130, 246, .4);
+      background: rgba(59, 130, 246, .08);
+      color: var(--blue);
+    }
+
+    .reset-btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(239, 68, 68, .3);
+      background: rgba(239, 68, 68, .08);
+      color: var(--red);
+      font-family: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .reset-btn:hover {
+      background: rgba(239, 68, 68, .15);
+    }
+
+    /* ── STUDENT GRID ── */
+    .students-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .student-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: all .25s;
+      animation: fadeIn .3s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .student-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border2);
+    }
+
+    .student-card.awake {
+      border-left: 3px solid var(--green);
+    }
+
+    .student-card.drowsy {
+      border-left: 3px solid var(--amber);
+    }
+
+    .student-card.sleeping {
+      border-left: 3px solid var(--red);
+      box-shadow: 0 0 20px rgba(239, 68, 68, .1);
+    }
+
+    .student-card.offline {
+      border-left: 3px solid var(--muted);
+      opacity: .7;
+    }
+
+    .student-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .avatar.awake {
+      background: var(--green-glow);
+      color: var(--green);
+      border: 1px solid rgba(16, 185, 129, .2);
+    }
+
+    .avatar.drowsy {
+      background: var(--amber-glow);
+      color: var(--amber);
+      border: 1px solid rgba(245, 158, 11, .2);
+    }
+
+    .avatar.sleeping {
+      background: var(--red-glow);
+      color: var(--red);
+      border: 1px solid rgba(239, 68, 68, .2);
+    }
+
+    .avatar.offline {
+      background: rgba(107, 114, 128, .1);
+      color: var(--muted);
+      border: 1px solid rgba(107, 114, 128, .2);
+    }
+
+    .student-info h3 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .student-info .sid {
+      font-size: 11px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .3px;
+      margin-bottom: 12px;
+    }
+
+    .status-badge.awake {
+      background: var(--green-glow);
+      color: var(--green);
+    }
+
+    .status-badge.drowsy {
+      background: var(--amber-glow);
+      color: var(--amber);
+    }
+
+    .status-badge.sleeping {
+      background: var(--red-glow);
+      color: var(--red);
+    }
+
+    .status-badge.offline {
+      background: rgba(107, 114, 128, .1);
+      color: var(--muted);
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .badge-dot.pulse-dot {
+      animation: pulse 1.5s infinite;
+    }
+
+    .card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      margin-top: 4px;
+    }
+
+    .card-meta .class-tag {
+      background: rgba(59, 130, 246, .08);
+      color: rgba(59, 130, 246, .8);
+      border: 1px solid rgba(59, 130, 246, .15);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+    }
+
+    /* ── ALERT BANNER ── */
+    .alert-banner {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      max-width: 340px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      pointer-events: none;
+    }
+
+    .alert-item {
+      background: var(--bg3);
+      border: 1px solid rgba(239, 68, 68, .4);
+      border-left: 4px solid var(--red);
+      border-radius: 12px;
+      padding: 14px 18px;
+      animation: slideIn .3s ease;
+      pointer-events: all;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, .4);
+    }
+
+    @keyframes slideIn {
+      from {
+        transform: translateX(120%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .alert-item .alert-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--red);
+      margin-bottom: 2px;
+    }
+
+    .alert-item .alert-body {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── LOG TABLE ── */
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-badge {
+      font-size: 11px;
+      background: rgba(59, 130, 246, .1);
+      color: var(--blue);
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-weight: 500;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .log-table-wrap {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead th {
+      padding: 14px 18px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      background: var(--thead-bg);
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+    }
+
+    tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    tbody tr:hover {
+      background: var(--row-hover);
+    }
+
+    tbody td {
+      padding: 12px 18px;
+    }
+
+    .log-status {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .log-status.awake {
+      background: var(--green-glow);
+      color: var(--green);
+    }
+
+    .log-status.drowsy {
+      background: var(--amber-glow);
+      color: var(--amber);
+    }
+
+    .log-status.sleeping {
+      background: var(--red-glow);
+      color: var(--red);
+    }
+
+    /* ── EMPTY STATE ── */
+    .empty-state {
+      text-align: center;
+      padding: 60px 24px;
+      color: var(--muted);
+    }
+
+    .empty-state .empty-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      header {
+        padding: 0 16px;
+      }
+
+      main {
+        padding: 20px 16px 40px;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .students-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+
+    /* ── SERVER URL CONFIG ── */
+    .config-bar {
+      background: rgba(59, 130, 246, .05);
+      border: 1px solid rgba(59, 130, 246, .15);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .config-bar label {
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .config-bar input {
+      flex: 1;
+      min-width: 200px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .config-bar input:focus {
+      border-color: rgba(59, 130, 246, .4);
+    }
+
+    .config-btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+      background: var(--blue);
+      border: none;
+      color: white;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+
+    .config-btn:hover {
+      opacity: .85;
+    }
+
+    .export-btn {
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(16, 185, 129, .3);
+      background: rgba(16, 185, 129, .08);
+      color: var(--green);
+      font-family: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+    .export-btn:hover {
+      background: rgba(16, 185, 129, .15);
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--scrollbar);
+      border-radius: 3px;
+    }
+
+    /* ── THEME TOGGLE ── */
+    .theme-toggle {
+      display: flex;
+      align-items: center;
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      border-radius: 100px;
+      padding: 4px;
+      gap: 2px;
+      cursor: pointer;
+    }
+
+    .theme-btn {
+      width: 34px;
+      height: 28px;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: all .22s;
+      color: var(--muted);
+    }
+
+    .theme-btn svg {
+      width: 16px;
+      height: 16px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .theme-btn.active {
+      background: var(--blue);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, .35);
+    }
+
+    .theme-btn:not(.active):hover {
+      background: var(--bg3);
+      color: var(--text);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--border2);
+      flex-shrink: 0;
+    }
+
+    .footer-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: .2px;
+    }
+
+    .footer-nim {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      color: var(--blue);
+      background: rgba(59, 130, 246, .08);
+      border: 1px solid rgba(59, 130, 246, .2);
+      padding: 3px 10px;
+      border-radius: 6px;
+      letter-spacing: .5px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .footer-brand span {
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    .footer-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--muted);
+      opacity: .5;
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="logo">
-  <img src="logoawakelens.ico" alt="Logo AwakeLens" style="width: 44px; height: 44px;">
-  AwakeLens
-</div>
-  <div class="header-right">
-    <span style="font-size:13px;color:var(--muted)" id="last-update">Menunggu data...</span>
-    <!-- Theme Toggle -->
-    <div class="theme-toggle" title="Ganti tema">
-      <!-- Dark mode icon: moon -->
-      <button class="theme-btn" id="btn-dark" onclick="setTheme('dark')" title="Mode Gelap">
-        <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-      </button>
-      <!-- Light mode icon: sun -->
-      <button class="theme-btn active" id="btn-light" onclick="setTheme('light')" title="Mode Terang">
-        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-      </button>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">
+      <img src="logoawakelens.ico" alt="Logo AwakeLens" style="width: 44px; height: 44px;">
+      AwakeLens
     </div>
-    <div class="conn-badge offline" id="conn-badge">
-      <div class="conn-dot" id="conn-dot"></div>
-      <span id="conn-text">Offline</span>
+    <div class="header-right">
+      <span style="font-size:13px;color:var(--muted)" id="last-update">Menunggu data...</span>
+      <div class="conn-badge offline" id="conn-badge">
+        <div class="conn-dot" id="conn-dot"></div>
+        <span id="conn-text">Offline</span>
+      </div><!-- Theme Toggle -->
+      <div class="theme-toggle" title="Ganti tema">
+        <!-- Dark mode icon: moon -->
+        <button class="theme-btn" id="btn-dark" onclick="setTheme('dark')" title="Mode Gelap">
+          <svg viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+        <!-- Light mode icon: sun -->
+        <button class="theme-btn active" id="btn-light" onclick="setTheme('light')" title="Mode Terang">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5" />
+            <line x1="12" y1="1" x2="12" y2="3" />
+            <line x1="12" y1="21" x2="12" y2="23" />
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+            <line x1="1" y1="12" x2="3" y2="12" />
+            <line x1="21" y1="12" x2="23" y2="12" />
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+          </svg>
+        </button>
+      </div>
+
     </div>
-  </div>
-</header>
+  </header>
 
-<main>
-  <!-- CONFIG BAR -->
-  <div class="config-bar">
-    <label>🔗 URL Server:</label>
-    <input type="text" id="server-url" placeholder="https://awakelens.up.railway.app" value="">
-    <button class="config-btn" onclick="connectToServer()">Hubungkan</button>
-  </div>
-
-  <div class="page-title">
-    <h1>Monitoring Kelas Online</h1>
-    <p id="subtitle">Hubungkan ke server untuk mulai memantau</p>
-  </div>
-
-  <!-- STATS -->
-  <div class="stats-grid">
-    <div class="stat-card awake">
-      <div class="stat-label">Aktif / Awake</div>
-      <div class="stat-value" id="count-awake">0</div>
-      <div class="stat-sub">Mahasiswa fokus</div>
+  <main>
+    <!-- CONFIG BAR -->
+    <div class="config-bar">
+      <label>🔗 URL Server:</label>
+      <input type="text" id="server-url" placeholder="https://awakelens.up.railway.app" value="">
+      <button class="config-btn" onclick="connectToServer()">Hubungkan</button>
     </div>
-    <div class="stat-card drowsy">
-      <div class="stat-label">Akan Mengantuk / Pre-Drowsy</div>
-      <div class="stat-value" id="count-drowsy">0</div>
-      <div class="stat-sub">perlu diperhatikan</div>
+
+    <div class="page-title">
+      <h1>Monitoring Kelas Online</h1>
+      <p id="subtitle">Hubungkan ke server untuk mulai memantau</p>
     </div>
-    <div class="stat-card sleep">
-      <div class="stat-label">Tidur / Drowsy</div>
-      <div class="stat-value" id="count-sleep">0</div>
-      <div class="stat-sub">perlu dibangunkan</div>
+
+    <!-- STATS -->
+    <div class="stats-grid">
+      <div class="stat-card awake">
+        <div class="stat-label">Aktif / Awake</div>
+        <div class="stat-value" id="count-awake">0</div>
+        <div class="stat-sub">Mahasiswa fokus</div>
+      </div>
+      <div class="stat-card drowsy">
+        <div class="stat-label">Akan Mengantuk / Pre-Drowsy</div>
+        <div class="stat-value" id="count-drowsy">0</div>
+        <div class="stat-sub">perlu diperhatikan</div>
+      </div>
+      <div class="stat-card sleep">
+        <div class="stat-label">Tidur / Drowsy</div>
+        <div class="stat-value" id="count-sleep">0</div>
+        <div class="stat-sub">perlu dibangunkan</div>
+      </div>
+      <div class="stat-card total">
+        <div class="stat-label">Total Terhubung</div>
+        <div class="stat-value" id="count-total">0</div>
+        <div class="stat-sub">Mahasiswa online</div>
+      </div>
     </div>
-    <div class="stat-card total">
-      <div class="stat-label">Total Terhubung</div>
-      <div class="stat-value" id="count-total">0</div>
-      <div class="stat-sub">Mahasiswa online</div>
+
+    <!-- CONTROLS -->
+    <div class="controls">
+      <div class="search-box">
+        <span style="color:var(--muted);font-size:14px">🔍</span>
+        <input type="text" id="search-input" placeholder="Cari nama atau NIM..." oninput="filterStudents()">
+      </div>
+      <button class="filter-btn active" onclick="setFilter('all', this)">Semua</button>
+      <button class="filter-btn" onclick="setFilter('awake', this)">Awake</button>
+      <button class="filter-btn" onclick="setFilter('drowsy', this)">Pre-Drowsy</button>
+      <button class="filter-btn" onclick="setFilter('sleeping', this)">Drowsy</button>
+      <button class="reset-btn" onclick="resetData()">Reset Data</button>
+      <button class="export-btn" onclick="exportExcel()" title="Export log ke Excel/CSV">📥 Export Excel</button>
     </div>
-  </div>
 
-  <!-- CONTROLS -->
-  <div class="controls">
-    <div class="search-box">
-      <span style="color:var(--muted);font-size:14px">🔍</span>
-      <input type="text" id="search-input" placeholder="Cari nama atau NIM..." oninput="filterStudents()">
+    <!-- STUDENTS GRID -->
+    <div class="students-grid" id="students-grid">
+      <div class="empty-state" style="grid-column:1/-1">
+        <div class="empty-icon">🎓</div>
+        <p>Belum ada Mahasiswa terhubung.<br>Minta Mahasiswa jalankan client_Mahasiswa.py</p>
+      </div>
     </div>
-    <button class="filter-btn active" onclick="setFilter('all', this)">Semua</button>
-    <button class="filter-btn" onclick="setFilter('awake', this)">Awake</button>
-    <button class="filter-btn" onclick="setFilter('drowsy', this)">Pre-Drowsy</button>
-    <button class="filter-btn" onclick="setFilter('sleeping', this)">Drowsy</button>
-    <button class="reset-btn" onclick="resetData()">Reset Data</button>
-  </div>
 
-  <!-- STUDENTS GRID -->
-  <div class="students-grid" id="students-grid">
-    <div class="empty-state" style="grid-column:1/-1">
-      <div class="empty-icon">🎓</div>
-      <p>Belum ada Mahasiswa terhubung.<br>Minta Mahasiswa jalankan client_Mahasiswa.py</p>
+    <!-- LOG TABLE -->
+    <div class="section-title">
+      Riwayat Kondisi Mengantuk
+      <span class="section-badge" id="log-count">0 entri</span>
     </div>
-  </div>
-
-  <!-- LOG TABLE -->
-  <div class="section-title">
-    Log Deteksi Terbaru
-    <span class="section-badge" id="log-count">0 entri</span>
-  </div>
-  <div class="log-table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>Waktu</th>
-          <th>Nama</th>
-          <th>NIM</th>
-          <th>Kelas</th>
-          <th>Status</th>
-          <th>Confidence</th>
-        </tr>
-      </thead>
-      <tbody id="log-tbody">
-        <tr>
-          <td colspan="6" style="text-align:center;color:var(--muted);padding:32px">
-            Belum ada log tersimpan
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</main>
-
-<!-- ALERT BANNER -->
-<div class="alert-banner" id="alert-banner"></div>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <img src="logoawakelens.ico" alt="" style="width:18px;height:18px;border-radius:4px;">
-      <span>AwakeLens</span>
-      &mdash; Sistem Deteksi Mengantuk
+    <div class="log-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Waktu</th>
+            <th>Nama</th>
+            <th>NIM</th>
+            <th>Kelas</th>
+            <th>Status</th>
+            <th>Confidence</th>
+          </tr>
+        </thead>
+        <tbody id="log-tbody">
+          <tr>
+            <td colspan="6" style="text-align:center;color:var(--muted);padding:32px">
+              Belum ada log tersimpan
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="footer-divider"></div>
-    <div class="footer-name">Dennis Ma'rifatul Kurnia</div>
-    <div class="footer-nim">2213030120</div>
-    <div class="footer-dot"></div>
-    <div class="footer-brand" style="font-size:11px">
-      Sistem Informasi &bull; 2022
+  </main>
+
+  <!-- ALERT BANNER -->
+  <div class="alert-banner" id="alert-banner"></div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="logoawakelens.ico" alt="" style="width:18px;height:18px;border-radius:4px;">
+        <span>AwakeLens</span>
+        &mdash; Sistem Deteksi Mengantuk
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-name">Dennis Ma'rifatul Kurnia</div>
+      <div class="footer-nim">2213030120</div>
+      <div class="footer-dot"></div>
+      <div class="footer-brand" style="font-size:11px">
+        Sistem Informasi &bull; 2022
+      </div>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<script>
-// ─── THEME ────────────────────────────────────────────────────────────────────
-function setTheme(t) {
-  document.documentElement.setAttribute('data-theme', t);
-  localStorage.setItem('theme', t);
-  document.getElementById('btn-dark').classList.toggle('active',  t === 'dark');
-  document.getElementById('btn-light').classList.toggle('active', t === 'light');
-}
-// Init theme — default light
-(function(){
-  const saved = localStorage.getItem('theme') || 'light';
-  setTheme(saved);
-})();
+  <script>
+    // ─── THEME ────────────────────────────────────────────────────────────────────
+    function setTheme(t) {
+      document.documentElement.setAttribute('data-theme', t);
+      localStorage.setItem('theme', t);
+      document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
+      document.getElementById('btn-light').classList.toggle('active', t === 'light');
+    }
+    // Init theme — default light
+    (function () {
+      const saved = localStorage.getItem('theme') || 'light';
+      setTheme(saved);
+    })();
 
-// ─── STATE ────────────────────────────────────────────────────────────────────
-let ws = null;
-let students = {};
-let logs = [];
-let activeFilter = 'all';
-let SERVER_URL = localStorage.getItem('server_url') || '';
+    // ─── STATE ────────────────────────────────────────────────────────────────────
+    let ws = null;
+    let students = {};
+    let logs = [];
+    let activeFilter = 'all';
+    let SERVER_URL = localStorage.getItem('server_url') || '';
 
-// Restore saved URL
-if (SERVER_URL) {
-  document.getElementById('server-url').value = SERVER_URL;
-}
+    // Restore saved URL
+    if (SERVER_URL) {
+      document.getElementById('server-url').value = SERVER_URL;
+    }
 
-// ─── CONNECT TO SERVER ────────────────────────────────────────────────────────
-function connectToServer() {
-  const url = document.getElementById('server-url').value.trim().replace(/\/$/, '');
-  if (!url) { alert('Masukkan URL server!'); return; }
+    // ─── CONNECT TO SERVER ────────────────────────────────────────────────────────
+    function connectToServer() {
+      const url = document.getElementById('server-url').value.trim().replace(/\/$/, '');
+      if (!url) { alert('Masukkan URL server!'); return; }
 
-  SERVER_URL = url;
-  localStorage.setItem('server_url', SERVER_URL);
+      SERVER_URL = url;
+      localStorage.setItem('server_url', SERVER_URL);
 
-  // Close existing ws
-  if (ws) ws.close();
+      // Close existing ws
+      if (ws) ws.close();
 
-  // Fetch initial data
-  fetchStudents();
-  fetchLogs();
+      // Fetch initial data
+      fetchStudents();
+      fetchLogs();
 
-  // Connect WebSocket
-  const wsUrl = SERVER_URL.replace(/^https?/, (m) => m === 'https' ? 'wss' : 'ws') + '/ws/dashboard';
-  ws = new WebSocket(wsUrl);
+      // Connect WebSocket
+      const wsUrl = SERVER_URL.replace(/^https?/, (m) => m === 'https' ? 'wss' : 'ws') + '/ws/dashboard';
+      ws = new WebSocket(wsUrl);
 
-  ws.onopen = () => setConnStatus(true);
-  ws.onclose = () => {
-    setConnStatus(false);
-    // Reconnect after 5s
-    setTimeout(() => { if (SERVER_URL) connectToServer(); }, 5000);
-  };
-  ws.onerror = () => setConnStatus(false);
+      ws.onopen = () => setConnStatus(true);
+      ws.onclose = () => {
+        setConnStatus(false);
+        // Reconnect after 5s
+        setTimeout(() => { if (SERVER_URL) connectToServer(); }, 5000);
+      };
+      ws.onerror = () => setConnStatus(false);
 
-  ws.onmessage = (e) => {
-    const data = JSON.parse(e.data);
-    if (data.type === 'initial_data') {
-      data.students.forEach(s => { students[s.student_id] = s; });
-      renderStudents();
-      updateStats();
-    } else if (data.type === 'detection_update') {
-      handleDetection(data);
-    } else if (data.type === 'reset') {
-      students = {};
-      logs = [];
+      ws.onmessage = (e) => {
+        const data = JSON.parse(e.data);
+        if (data.type === 'initial_data') {
+          data.students.forEach(s => { students[s.student_id] = s; });
+          renderStudents();
+          updateStats();
+        } else if (data.type === 'detection_update') {
+          handleDetection(data);
+        } else if (data.type === 'reset') {
+          students = {};
+          logs = [];
+          renderStudents();
+          renderLogs();
+          updateStats();
+        }
+      };
+
+      document.getElementById('subtitle').textContent = `Monitoring • ${SERVER_URL}`;
+    }
+
+    // ─── FETCH ────────────────────────────────────────────────────────────────────
+    async function fetchStudents() {
+      try {
+        const res = await fetch(`${SERVER_URL}/api/students`);
+        const data = await res.json();
+        students = {};
+        data.students.forEach(s => { students[s.student_id] = s; });
+        renderStudents();
+        updateStats();
+      } catch { }
+    }
+
+    async function fetchLogs() {
+      try {
+        const res = await fetch(`${SERVER_URL}/api/logs?limit=50`);
+        const data = await res.json();
+        logs = data.logs;
+        renderLogs();
+      } catch { }
+    }
+
+    async function resetData() {
+      if (!confirm('Reset semua data Mahasiswa?')) return;
+      try {
+        await fetch(`${SERVER_URL}/api/reset`, { method: 'DELETE' });
+        students = {};
+        logs = [];
+        renderStudents();
+        renderLogs();
+        updateStats();
+      } catch { alert('Gagal reset. Pastikan server terhubung.'); }
+    }
+
+    // ─── HANDLE DETECTION ─────────────────────────────────────────────────────────
+    function handleDetection(data) {
+      const prev = students[data.student_id];
+      const prevStatus = prev ? prev.current_status : null;
+
+      students[data.student_id] = {
+        student_id: data.student_id,
+        student_name: data.student_name,
+        class_name: data.class_name,
+        current_status: data.status,
+        last_seen: data.timestamp,
+        confidence: data.confidence
+      };
+
+      // Alert jika sleeping
+      if (data.status === 'sleeping' && prevStatus !== 'sleeping') {
+        showAlert(data.student_name, data.class_name);
+        const ac = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ac.createOscillator();
+        const gain = ac.createGain();
+        osc.connect(gain); gain.connect(ac.destination);
+        osc.frequency.value = 880;
+        gain.gain.setValueAtTime(0.3, ac.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.5);
+        osc.start(); osc.stop(ac.currentTime + 0.5);
+      }
+
+      // ── Smart log: catat hanya perubahan status + setiap update drowsy/sleeping ──
+      // - awake / offline: hanya saat status berubah (tidak duplikat)
+      // - drowsy / sleeping: selalu catat agar dosen tau jam pastinya
+      const isAlert = data.status === 'drowsy' || data.status === 'sleeping';
+      const statusChanged = prevStatus !== data.status;
+
+      if (isAlert || statusChanged) {
+        logs.unshift({
+          timestamp: data.timestamp,
+          student_name: data.student_name,
+          student_id: data.student_id,
+          class_name: data.class_name,
+          status: data.status,
+          confidence: data.confidence,
+          is_alert: isAlert
+        });
+        if (logs.length > 200) logs.pop();
+      }
+
       renderStudents();
       renderLogs();
       updateStats();
+
+      const now = new Date();
+      document.getElementById('last-update').textContent =
+        `Update: ${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
     }
-  };
 
-  document.getElementById('subtitle').textContent = `Monitoring • ${SERVER_URL}`;
-}
+    // ─── RENDER STUDENTS ──────────────────────────────────────────────────────────
+    function renderStudents() {
+      const grid = document.getElementById('students-grid');
+      const search = document.getElementById('search-input').value.toLowerCase();
 
-// ─── FETCH ────────────────────────────────────────────────────────────────────
-async function fetchStudents() {
-  try {
-    const res = await fetch(`${SERVER_URL}/api/students`);
-    const data = await res.json();
-    students = {};
-    data.students.forEach(s => { students[s.student_id] = s; });
-    renderStudents();
-    updateStats();
-  } catch {}
-}
+      const filtered = Object.values(students).filter(s => {
+        const matchFilter = activeFilter === 'all' || s.current_status === activeFilter;
+        const matchSearch = !search ||
+          s.student_name.toLowerCase().includes(search) ||
+          s.student_id.toLowerCase().includes(search);
+        return matchFilter && matchSearch;
+      });
 
-async function fetchLogs() {
-  try {
-    const res = await fetch(`${SERVER_URL}/api/logs?limit=50`);
-    const data = await res.json();
-    logs = data.logs;
-    renderLogs();
-  } catch {}
-}
-
-async function resetData() {
-  if (!confirm('Reset semua data Mahasiswa?')) return;
-  try {
-    await fetch(`${SERVER_URL}/api/reset`, { method: 'DELETE' });
-    students = {};
-    logs = [];
-    renderStudents();
-    renderLogs();
-    updateStats();
-  } catch { alert('Gagal reset. Pastikan server terhubung.'); }
-}
-
-// ─── HANDLE DETECTION ─────────────────────────────────────────────────────────
-function handleDetection(data) {
-  const prev = students[data.student_id];
-  students[data.student_id] = {
-    student_id: data.student_id,
-    student_name: data.student_name,
-    class_name: data.class_name,
-    current_status: data.status,
-    last_seen: data.timestamp,
-    confidence: data.confidence
-  };
-
-  // Alert jika sleeping
-  if (data.status === 'sleeping' && (!prev || prev.current_status !== 'sleeping')) {
-    showAlert(data.student_name, data.class_name);
-    // Sound alert (browser beep)
-    const ac = new (window.AudioContext || window.webkitAudioContext)();
-    const osc = ac.createOscillator();
-    const gain = ac.createGain();
-    osc.connect(gain); gain.connect(ac.destination);
-    osc.frequency.value = 880;
-    gain.gain.setValueAtTime(0.3, ac.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.5);
-    osc.start(); osc.stop(ac.currentTime + 0.5);
-  }
-
-  // Prepend log
-  logs.unshift({
-    timestamp: data.timestamp,
-    student_name: data.student_name,
-    student_id: data.student_id,
-    class_name: data.class_name,
-    status: data.status,
-    confidence: data.confidence
-  });
-  if (logs.length > 50) logs.pop();
-
-  renderStudents();
-  renderLogs();
-  updateStats();
-
-  // Last update time
-  const now = new Date();
-  document.getElementById('last-update').textContent =
-    `Update: ${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}`;
-}
-
-// ─── RENDER STUDENTS ──────────────────────────────────────────────────────────
-function renderStudents() {
-  const grid = document.getElementById('students-grid');
-  const search = document.getElementById('search-input').value.toLowerCase();
-
-  const filtered = Object.values(students).filter(s => {
-    const matchFilter = activeFilter === 'all' || s.current_status === activeFilter;
-    const matchSearch = !search ||
-      s.student_name.toLowerCase().includes(search) ||
-      s.student_id.toLowerCase().includes(search);
-    return matchFilter && matchSearch;
-  });
-
-  if (filtered.length === 0) {
-    grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="empty-state" style="grid-column:1/-1">
       <div class="empty-icon">🎓</div>
       <p>Belum ada Mahasiswa terhubung.<br>Minta Mahasiswa jalankan client_Mahasiswa.py</p>
     </div>`;
-    return;
-  }
+        return;
+      }
 
-  // Sort: sleeping first, then drowsy, then awake
-  const order = { sleeping: 0, drowsy: 1, awake: 2, offline: 3 };
-  filtered.sort((a, b) => (order[a.current_status] || 3) - (order[b.current_status] || 3));
+      // Sort: sleeping first, then drowsy, then awake
+      const order = { sleeping: 0, drowsy: 1, awake: 2, offline: 3 };
+      filtered.sort((a, b) => (order[a.current_status] || 3) - (order[b.current_status] || 3));
 
-  grid.innerHTML = filtered.map(s => {
-    const st = s.current_status || 'offline';
-    const initials = s.student_name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
-    const statusLabel = { awake: '● AWAKE', drowsy: '◐ DROWSY', sleeping: '● SLEEPING', offline: '○ OFFLINE' }[st] || st;
-    const isPulse = st === 'sleeping' || st === 'drowsy';
-    const conf = s.confidence ? `${s.confidence}%` : '—';
-    const lastSeen = s.last_seen ? s.last_seen.split(' ')[1] || s.last_seen : '—';
+      grid.innerHTML = filtered.map(s => {
+        const st = s.current_status || 'offline';
+        const initials = s.student_name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+        const statusLabel = { awake: '● AWAKE', drowsy: '◐ DROWSY', sleeping: '● SLEEPING', offline: '○ OFFLINE' }[st] || st;
+        const isPulse = st === 'sleeping' || st === 'drowsy';
+        const conf = s.confidence ? `${s.confidence}%` : '—';
+        const lastSeen = s.last_seen ? s.last_seen.split(' ')[1] || s.last_seen : '—';
 
-    return `<div class="student-card ${st}">
+        return `<div class="student-card ${st}">
       <div class="student-header">
         <div class="avatar ${st}">${initials}</div>
         <div class="student-info">
@@ -807,86 +1268,125 @@ function renderStudents() {
         <span>${lastSeen}</span>
       </div>
     </div>`;
-  }).join('');
-}
+      }).join('');
+    }
 
-// ─── RENDER LOGS ──────────────────────────────────────────────────────────────
-function renderLogs() {
-  const tbody = document.getElementById('log-tbody');
-  document.getElementById('log-count').textContent = `${logs.length} entri`;
+    // ─── RENDER LOGS ──────────────────────────────────────────────────────────────
+    function renderLogs() {
+      const tbody = document.getElementById('log-tbody');
+      document.getElementById('log-count').textContent = logs.length + ' entri';
 
-  if (logs.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:32px">Belum ada log</td></tr>`;
-    return;
-  }
+      if (logs.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:32px">Belum ada log kondisi mengantuk</td></tr>';
+        return;
+      }
 
-  tbody.innerHTML = logs.slice(0, 30).map(l => `<tr>
-    <td style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)">${l.timestamp || '—'}</td>
-    <td style="font-weight:500">${escHtml(l.student_name)}</td>
-    <td style="font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)">${escHtml(l.student_id)}</td>
-    <td style="color:var(--muted);font-size:12px">${escHtml(l.class_name || '—')}</td>
-    <td><span class="log-status ${l.status}">${(l.status||'').toUpperCase()}</span></td>
-    <td style="font-family:'JetBrains Mono',monospace;font-size:12px">${l.confidence ? l.confidence+'%' : '—'}</td>
-  </tr>`).join('');
-}
+      const statusLabel = { awake: 'AWAKE', drowsy: 'PRE-DROWSY', sleeping: 'DROWSY/TIDUR', offline: 'OFFLINE' };
 
-// ─── UPDATE STATS ─────────────────────────────────────────────────────────────
-function updateStats() {
-  const all = Object.values(students);
-  const online = all.filter(s => s.current_status !== 'offline');
-  document.getElementById('count-awake').textContent  = all.filter(s => s.current_status === 'awake').length;
-  document.getElementById('count-drowsy').textContent = all.filter(s => s.current_status === 'drowsy').length;
-  document.getElementById('count-sleep').textContent  = all.filter(s => s.current_status === 'sleeping').length;
-  document.getElementById('count-total').textContent  = online.length;
-}
+      tbody.innerHTML = logs.slice(0, 100).map(function(l) {
+        const isAlert = l.is_alert || l.status === 'drowsy' || l.status === 'sleeping';
+        const rowStyle = isAlert
+          ? (l.status === 'sleeping' ? 'background:rgba(239,68,68,0.06);' : 'background:rgba(245,158,11,0.05);')
+          : '';
+        const alertMark = l.status === 'sleeping' ? '🔴 ' : (l.status === 'drowsy' ? '🟡 ' : '');
+        const label = statusLabel[l.status] || (l.status || '').toUpperCase();
+        return '<tr style="' + rowStyle + '">' +
+          '<td style="font-family:\'JetBrains Mono\',monospace;font-size:12px;color:var(--muted)">' + (l.timestamp || '—') + '</td>' +
+          '<td style="font-weight:500">' + alertMark + escHtml(l.student_name) + '</td>' +
+          '<td style="font-family:\'JetBrains Mono\',monospace;font-size:12px;color:var(--muted)">' + escHtml(l.student_id) + '</td>' +
+          '<td style="color:var(--muted);font-size:12px">' + escHtml(l.class_name || '—') + '</td>' +
+          '<td><span class="log-status ' + l.status + '">' + label + '</span></td>' +
+          '<td style="font-family:\'JetBrains Mono\',monospace;font-size:12px">' + (l.confidence ? l.confidence + '%' : '—') + '</td>' +
+          '</tr>';
+      }).join('');
+    }
 
-// ─── FILTER ───────────────────────────────────────────────────────────────────
-function setFilter(f, btn) {
-  activeFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderStudents();
-}
+    // ─── EXPORT EXCEL (CSV) ───────────────────────────────────────────────────────
+    function exportExcel() {
+      if (logs.length === 0) { alert('Belum ada log untuk diekspor.'); return; }
+      const statusLabel = { awake: 'AWAKE', drowsy: 'PRE-DROWSY', sleeping: 'DROWSY/TIDUR', offline: 'OFFLINE' };
+      const bom = '\uFEFF';
+      const header = ['Waktu', 'Nama Mahasiswa', 'NIM', 'Kelas', 'Status', 'Confidence (%)'];
+      const rows = logs.map(function(l) {
+        return [
+          l.timestamp || '',
+          l.student_name || '',
+          l.student_id || '',
+          l.class_name || '',
+          statusLabel[l.status] || (l.status || '').toUpperCase(),
+          l.confidence ? String(l.confidence).replace('%','') : ''
+        ].map(function(v){ return '"' + String(v).replace(/"/g, '""') + '"'; }).join(',');
+      });
+      const csv = bom + [header.join(',')].concat(rows).join('\r\n');
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      const now = new Date();
+      const ts = now.getFullYear() + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0') + '_' + String(now.getHours()).padStart(2,'0') + String(now.getMinutes()).padStart(2,'0');
+      link.href = url;
+      link.download = 'awakelens_log_' + ts + '.csv';
+      link.click();
+      URL.revokeObjectURL(url);
+    }
 
-function filterStudents() { renderStudents(); }
+    // ─── UPDATE STATS ─────────────────────────────────────────────────────────────
+    function updateStats() {
+      const all = Object.values(students);
+      const online = all.filter(s => s.current_status !== 'offline');
+      document.getElementById('count-awake').textContent = all.filter(s => s.current_status === 'awake').length;
+      document.getElementById('count-drowsy').textContent = all.filter(s => s.current_status === 'drowsy').length;
+      document.getElementById('count-sleep').textContent = all.filter(s => s.current_status === 'sleeping').length;
+      document.getElementById('count-total').textContent = online.length;
+    }
 
-// ─── ALERT ────────────────────────────────────────────────────────────────────
-function showAlert(name, className) {
-  const banner = document.getElementById('alert-banner');
-  const el = document.createElement('div');
-  el.className = 'alert-item';
-  el.innerHTML = `<div class="alert-title">⚠️ Mahasiswa Tertidur!</div>
+    // ─── FILTER ───────────────────────────────────────────────────────────────────
+    function setFilter(f, btn) {
+      activeFilter = f;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderStudents();
+    }
+
+    function filterStudents() { renderStudents(); }
+
+    // ─── ALERT ────────────────────────────────────────────────────────────────────
+    function showAlert(name, className) {
+      const banner = document.getElementById('alert-banner');
+      const el = document.createElement('div');
+      el.className = 'alert-item';
+      el.innerHTML = `<div class="alert-title">⚠️ Mahasiswa Tertidur!</div>
     <div class="alert-body">${escHtml(name)} (${escHtml(className || 'Kelas Umum')}) terdeteksi tidur</div>`;
-  banner.appendChild(el);
-  setTimeout(() => el.remove(), 6000);
-}
+      banner.appendChild(el);
+      setTimeout(() => el.remove(), 6000);
+    }
 
-// ─── CONN STATUS ──────────────────────────────────────────────────────────────
-function setConnStatus(online) {
-  const badge = document.getElementById('conn-badge');
-  const dot = document.getElementById('conn-dot');
-  const text = document.getElementById('conn-text');
-  badge.className = 'conn-badge ' + (online ? 'online' : 'offline');
-  dot.className = 'conn-dot ' + (online ? 'pulse' : '');
-  text.textContent = online ? 'Live' : 'Offline';
-}
+    // ─── CONN STATUS ──────────────────────────────────────────────────────────────
+    function setConnStatus(online) {
+      const badge = document.getElementById('conn-badge');
+      const dot = document.getElementById('conn-dot');
+      const text = document.getElementById('conn-text');
+      badge.className = 'conn-badge ' + (online ? 'online' : 'offline');
+      dot.className = 'conn-dot ' + (online ? 'pulse' : '');
+      text.textContent = online ? 'Live' : 'Offline';
+    }
 
-// ─── UTILS ────────────────────────────────────────────────────────────────────
-function escHtml(str) {
-  if (!str) return '';
-  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
+    // ─── UTILS ────────────────────────────────────────────────────────────────────
+    function escHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
 
-// Auto-connect if URL saved
-if (SERVER_URL) connectToServer();
+    // Auto-connect if URL saved
+    if (SERVER_URL) connectToServer();
 
-// Polling fallback jika WS gagal
-setInterval(() => {
-  if (SERVER_URL && (!ws || ws.readyState === WebSocket.CLOSED)) {
-    fetchStudents();
-    fetchLogs();
-  }
-}, 10000);
-</script>
+    // Polling fallback jika WS gagal
+    setInterval(() => {
+      if (SERVER_URL && (!ws || ws.readyState === WebSocket.CLOSED)) {
+        fetchStudents();
+        fetchLogs();
+      }
+    }, 10000);
+  </script>
 </body>
+
 </html>
