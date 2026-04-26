@@ -1244,7 +1244,7 @@
       grid.innerHTML = filtered.map(s => {
         const st = s.current_status || 'offline';
         const initials = s.student_name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
-        const statusLabel = { awake: '● AWAKE', drowsy: '◐ DROWSY', sleeping: '● SLEEPING', offline: '○ OFFLINE' }[st] || st;
+        const statusLabel = { awake: '● AWAKE', drowsy: '◐ PRE-DROWSY', sleeping: '● DROWSY', offline: '○ OFFLINE' }[st] || st;
         const isPulse = st === 'sleeping' || st === 'drowsy';
         const conf = s.confidence ? `${s.confidence}%` : '—';
         const lastSeen = s.last_seen ? s.last_seen.split(' ')[1] || s.last_seen : '—';
