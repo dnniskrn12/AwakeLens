@@ -996,7 +996,6 @@
       <button class="filter-btn" onclick="setFilter('drowsy', this)">Pre-Drowsy</button>
       <button class="filter-btn" onclick="setFilter('sleeping', this)">Drowsy</button>
       <button class="reset-btn" onclick="resetData()">Reset Data</button>
-      <button class="export-btn" onclick="exportExcel()" title="Export log ke Excel/CSV">📥 Export Excel</button>
     </div>
 
     <!-- STUDENTS GRID -->
@@ -1300,34 +1299,7 @@
       }).join('');
     }
 
-    // ─── EXPORT EXCEL (CSV) ───────────────────────────────────────────────────────
-    function exportExcel() {
-      if (logs.length === 0) { alert('Belum ada log untuk diekspor.'); return; }
-      const statusLabel = { awake: 'AWAKE', drowsy: 'PRE-DROWSY', sleeping: 'DROWSY/TIDUR', offline: 'OFFLINE' };
-      const bom = '\uFEFF';
-      const header = ['Waktu', 'Nama Mahasiswa', 'NIM', 'Kelas', 'Status', 'Confidence (%)'];
-      const rows = logs.map(function(l) {
-        return [
-          l.timestamp || '',
-          l.student_name || '',
-          l.student_id || '',
-          l.class_name || '',
-          statusLabel[l.status] || (l.status || '').toUpperCase(),
-          l.confidence ? String(l.confidence).replace('%','') : ''
-        ].map(function(v){ return '"' + String(v).replace(/"/g, '""') + '"'; }).join(',');
-      });
-      const csv = bom + [header.join(',')].concat(rows).join('\r\n');
-      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      const now = new Date();
-      const ts = now.getFullYear() + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0') + '_' + String(now.getHours()).padStart(2,'0') + String(now.getMinutes()).padStart(2,'0');
-      link.href = url;
-      link.download = 'awakelens_log_' + ts + '.csv';
-      link.click();
-      URL.revokeObjectURL(url);
-    }
-
+    
     // ─── UPDATE STATS ─────────────────────────────────────────────────────────────
     function updateStats() {
       const all = Object.values(students);
